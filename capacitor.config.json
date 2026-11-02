@@ -1,0 +1,6 @@
+{
+  "appId": "ir.pension.calculator",
+  "appName": "محاسبه‌گر مستمری",
+  "webDir": "www",
+  "bundledWebRuntime": false
+}
