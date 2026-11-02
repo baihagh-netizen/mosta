@@ -1,1 +1,26 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#173b5e"><title>محاسبه‌گر مستمری</title>
+<style>
+:root{font-family:Tahoma,Arial,sans-serif;color:#172b3a;background:#f2f5f8}*{box-sizing:border-box}body{margin:0;padding:0 0 28px}header{background:#173b5e;color:white;padding:24px 18px 20px;border-radius:0 0 22px 22px}h1{font-size:22px;margin:0 0 8px}header p{font-size:13px;line-height:1.9;margin:0;color:#dce8f4}.wrap{max-width:720px;margin:auto;padding:14px}.card{background:white;border-radius:16px;padding:16px;margin:12px 0;box-shadow:0 3px 14px #102f4b0d}h2{font-size:16px;margin:0 0 14px;color:#173b5e}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field label{display:block;font-size:12px;margin-bottom:6px;color:#526579}.field input,.field select{width:100%;border:1px solid #cbd5df;border-radius:10px;padding:12px 10px;background:#fff;font:inherit;font-size:14px;min-width:0}.wide{grid-column:1/-1}button{border:0;border-radius:11px;padding:13px 15px;font:inherit;font-weight:bold;cursor:pointer}.primary{background:#1768a5;color:white;width:100%}.secondary{background:#e9f1f7;color:#173b5e}.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}.result{background:#eaf5ee;border:1px solid #b9dfc5;border-radius:14px;padding:16px;margin-top:12px}.amount{font-size:25px;font-weight:bold;color:#176b3a;overflow-wrap:anywhere}.small{font-size:12px;color:#617385;line-height:1.9}.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.stat{background:#f5f8fb;border-radius:10px;padding:11px}.stat b{display:block;font-size:14px;margin-top:5px;overflow-wrap:anywhere}.case{border:1px solid #e0e7ed;padding:12px;border-radius:10px;margin:8px 0}.case button{margin:6px 4px 0 0}.danger{background:#fff0ef;color:#a12820}.notice{font-size:12px;line-height:2;color:#805719;background:#fff7e5;padding:12px;border-radius:10px}footer{text-align:center;font-size:11px;color:#748393;padding:12px}@media(max-width:420px){.grid{grid-template-columns:1fr}.wide{grid-column:auto}.amount{font-size:22px}}
+</style></head>
+<body><header><h1>محاسبه‌گر مستمری بازنشستگی</h1><p>نسخه شخصی آفلاین · ذخیره پرونده‌ها روی همین گوشی</p></header><main class="wrap">
+<section class="card"><h2>اطلاعات پرونده</h2><div class="grid">
+<div class="field wide"><label for="name">نام پرونده</label><input id="name" placeholder="مثلاً پرونده بازنشستگی من"></div>
+<div class="field"><label for="hire">تاریخ استخدام (میلادی)</label><input id="hire" type="date" value="1996-03-20"></div>
+<div class="field"><label for="retire">تاریخ بازنشستگی (میلادی)</label><input id="retire" type="date" value="2026-12-31"></div>
+<div class="field"><label for="promotion">تاریخ آخرین ترفیع (میلادی)</label><input id="promotion" type="date" value="2025-12-31"></div>
+<div class="field"><label for="military">سابقه سربازی (سال)</label><input id="military" type="number" min="0" max="10" step="0.1" value="2"></div>
+<div class="field"><label for="salary1405">حقوق پایه ماهانه ۱۴۰۵ (تومان)</label><input id="salary1405" type="number" min="0" value="50000000"></div>
+<div class="field"><label for="salary1406">حقوق پایه ماهانه ۱۴۰۶ (تومان)</label><input id="salary1406" type="number" min="0" value="60000000"></div>
+<div class="field"><label for="attraction">مدت حق جذب (سال)</label><input id="attraction" type="number" min="0" max="30" step="0.5" value="0"></div>
+<div class="field"><label for="personalRate">درصد پایه شخصی</label><input id="personalRate" type="number" min="0" max="100" step="0.1" value="0"></div>
+<div class="field"><label for="personalYears">مدت پایه شخصی (سال)</label><input id="personalYears" type="number" min="0" max="30" step="0.5" value="0"></div>
+<div class="field"><label for="educationRate">درصد مدرک تحصیلی</label><input id="educationRate" type="number" min="0" max="100" step="0.1" value="0"></div>
+<div class="field"><label for="educationYears">مدت اثر مدرک (سال)</label><input id="educationYears" type="number" min="0" max="30" step="0.5" value="0"></div>
+</div><div class="actions"><button class="primary" id="calc">محاسبه مستمری</button><button class="secondary" id="save">ذخیره پرونده</button></div><div id="output" hidden></div></section>
+<section class="card"><h2>پرونده‌های ذخیره‌شده</h2><div class="actions"><button class="secondary" id="export">خروجی CSV</button><button class="secondary" id="backup">پشتیبان JSON</button></div><div id="cases" class="small">هنوز پرونده‌ای ذخیره نشده است.</div></section>
+<section class="card"><h2>فرض‌های محاسبه</h2><p class="small">ضریب حقوق ۱٫۳۲۵؛ ترفیع حداکثر ۵٪ بر اساس روزهای سپری‌شده از آخرین ترفیع؛ میانگین حقوق ۲۴ ماه از ۱۲ ماه ۱۴۰۵ و ۱۲ ماه ۱۴۰۶؛ اثر ویژه ۳۹٪ و اثر کارگاهی ۱۳٪؛ اثر حق جذب، پایه شخصی و مدرک با فرمول نسخه اولیه محاسبه می‌شود. تاریخ‌ها در این نسخه به میلادی وارد می‌شوند.</p><div class="notice">این برنامه محاسبه‌گر تقریبی بر پایه فرض‌های ثبت‌شده است و تأیید مقررات رسمی صندوق یا سازمان نیست. درصدها و نحوه اعمال مزایا باید با واحد بازنشستگی تطبیق داده شوند. حقوق ۱۴۰۴ در این فرمول ۲۴ ماهه استفاده نمی‌شود.</div></section>
+<footer>نسخه شخصی · اطلاعات فقط در حافظه همین مرورگر/برنامه ذخیره می‌شود.</footer></main><script src="app.js"></script></body></html>
 
